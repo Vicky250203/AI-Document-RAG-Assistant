@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>DocuMind AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                ◈
+            </div>
+
+            <div>
+                <h2>DocuMind</h2>
+                <span>AI Document Assistant</span>
+            </div>
+
+        </div>
+
+
+        <div class="sidebar-section">
+
+            <h3>DOCUMENTS</h3>
+
+            <div class="document-list">
+
+                {% for document in documents %}
+
+                <div class="document">
+
+                    <span class="file-icon">📄</span>
+
+                    <span>
+                        {{ document }}
+                    </span>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="status">
+
+                <span class="status-dot"></span>
+
+                <div>
+
+                    <strong>System Online</strong>
+
+                    <small>
+                        Gemini 2.5 Flash
+                    </small>
+
+                </div>
+
+            </div>
+
+            <button id="clearButton"
+                    class="clear-button">
+
+                Clear conversation
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- Main -->
+
+    <main class="main">
+
+        <!-- Header -->
+
+        <header class="header">
+
+            <div>
+
+                <h1>AI Document Assistant</h1>
+
+                <p>
+                    Ask questions about your documents
+                </p>
+
+            </div>
+
+
+            <div class="header-badge">
+
+                <span class="green-dot"></span>
+
+                {{ document_count }} Documents
+
+            </div>
+
+        </header>
+
+
+        <!-- Chat -->
+
+        <section id="chat"
+                 class="chat">
+
+            <div class="welcome">
+
+                <div class="welcome-icon">
+                    ✦
+                </div>
+
+                <h2>
+                    How can I help you?
+                </h2>
+
+                <p>
+                    Ask me anything about the documents
+                    loaded into the knowledge base.
+                </p>
+
+
+                <div class="suggestions">
+
+                    <button onclick="askSuggestion(this)">
+                        Summarize the documents
+                    </button>
+
+                    <button onclick="askSuggestion(this)">
+                        What are the main topics?
+                    </button>
+
+                    <button onclick="askSuggestion(this)">
+                        What important information is mentioned?
+                    </button>
+                    <div class="upload-section">
+
+    <h3>Upload Document</h3>
+
+    <form id="uploadForm">
+
+        <input
+            type="file"
+            id="fileInput"
+            name="file"
+            accept=".pdf,.txt,.md"
+        >
+
+        <button type="submit">
+            Upload
+        </button>
+
+    </form>
+
+    <p id="uploadStatus"></p>
+
+</div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Input -->
+
+        <div class="input-area">
+
+            <div class="input-box">
+
+                <textarea
+                    id="messageInput"
+                    placeholder="Ask something about your documents..."
+                    rows="1"></textarea>
+
+                <button id="sendButton"
+                        class="send-button">
+
+                    ➤
+
+                </button>
+
+            </div>
+
+            <p class="input-info">
+
+                AI responses are generated using
+                your uploaded documents.
+
+            </p>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>
